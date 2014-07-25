@@ -1,4 +1,4 @@
 TGame
 =====
 
-A Simple Try of Making Game
+A Simple Try Of Writing a Game
