@@ -12,7 +12,15 @@ class Net
 	};
 public:
 	Net(void);
+	void check();
+	bool isClosed();
+	void server(int);
+	bool isInvalid();
 	virtual ~Net(void);
+private:
+	int socket;
+	NetKind kind;
+	bool closed;
 };
 
 #endif
