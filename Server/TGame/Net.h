@@ -5,17 +5,23 @@ class Net
 {
 	enum NetKind
 	{
-		Server=1,
-		Accept,
-		Client,
-		Unknow,
+		SERVER=1,
+		ACCEPT,
+		CLIENT,
+		UNKNOW,
 	};
 public:
 	Net(void);
-	void check();
-	bool isClosed();
-	void server(int);
-	bool isInvalid();
+	bool IsClosed();
+	void Server(int);
+	void Accpet(int);
+	bool IsInvalid();
+	bool IsServer();
+	bool IsClient();
+	bool IsAccpet();
+	int	GetSocket();
+	int Recv();
+	int Send();
 	virtual ~Net(void);
 private:
 	int socket;

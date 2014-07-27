@@ -14,11 +14,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Net.cpp" />
     <ClCompile Include="NetWork.cpp" />
+    <ClCompile Include="Select.cpp" />
     <ClCompile Include="Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Assert.h" />
     <ClInclude Include="Net.h" />
     <ClInclude Include="NetWork.h" />
+    <ClInclude Include="Select.h" />
     <ClInclude Include="Singleton.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

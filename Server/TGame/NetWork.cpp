@@ -1,7 +1,5 @@
 #include "NetWork.h"
-#ifdef _WIN32
-#include <winsock2.h>
-#endif
+#include "Assert.h"
 
 NetWork* NetWork::Singleton<NetWork>::_instance=0;
 
@@ -10,7 +8,7 @@ NetWork::NetWork(void)
 	
 }
 
-void NetWork::start()
+void NetWork::Start()
 {
 #ifdef _WIN32
 	WSADATA     wsaData;  
@@ -45,24 +43,44 @@ Net NetWork::Listen(const char* host, OnAccept onAccept, OnClose onclose)
 		return net;
     if(listen(sock, 32) != 0)
         return net;
-	net.server(sock);
+	net.Server(sock);
+	#ifdef _WIN32
+		select.Add(sock);
+	#endif
 	return net;
+}
+
+void NetWork::Accpet(Net net)
+{
+	TAssert(net.IsServer(), "Only Listen Socket Can Accpet!");
+	Net newnet;
+	SOCKET newsock = ::accept(net.GetSocket(), NULL, NULL);
+	if( newsock < 0 )
+	{
+		return;
+	}
+	newnet.Accpet(newsock);
+	nets.push_back(newnet);
+	select.Add(newsock);
 }
 
 void NetWork::Loop()
 {
+	select.Dispatch(0);
 	std::list<Net>::iterator it;
 	for(it=nets.begin();it!=nets.end();)
 	{
 		Net net=*it;
-		if(net.isClosed())
+		if(net.IsClosed())
 		{
 			nets.erase(it++);
-		}else{
-			net.check();
-			it++;
 		}
 	}
+}
+
+std::list<Net> NetWork::GetNets()
+{
+	return nets;
 }
 
 NetWork::~NetWork(void)

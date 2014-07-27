@@ -27,6 +27,9 @@
     <ClCompile Include="Singleton.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Select.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Net.h">
@@ -36,6 +39,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Select.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Assert.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
