@@ -27,10 +27,14 @@
     <ClCompile Include="Singleton.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="NetBuffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="BufferBase.cpp">
+=======
+    <ClCompile Include="Select.cpp">
+>>>>>>> 5e16a6995c804ee96b36ac3327a593524c78d0f2
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +48,17 @@
     <ClInclude Include="Singleton.h">
       <Filter>头文件</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="NetBuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="BufferBase.h">
+=======
+    <ClInclude Include="Select.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Assert.h">
+>>>>>>> 5e16a6995c804ee96b36ac3327a593524c78d0f2
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

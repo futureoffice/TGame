@@ -2,33 +2,60 @@
 
 
 Net::Net(void)
-	:socket(0),kind(Unknow),closed(false)
+	:socket(0),kind(UNKNOW),closed(false)
 {
 }
 
-void Net::check()
-{
-	if(kind==NetKind::Server)
-	{
-
-	}else
-	{
-	}
-}
-
-void Net::server(int socket)
+void Net::Server(int socket)
 {
 	this->socket=socket;
 	this->closed=false;
-	this->kind=NetKind::Server;
+	this->kind=NetKind::SERVER;
 }
 
-bool Net::isInvalid()
+bool Net::IsInvalid()
 {
-	return kind==NetKind::Unknow;
+	return kind==NetKind::UNKNOW;
 }
 
-bool Net::isClosed()
+bool Net::IsServer()
+{
+	return kind==NetKind::SERVER;
+}
+
+bool Net::IsClient()
+{
+	return kind==NetKind::CLIENT;
+}
+
+bool Net::IsAccpet()
+{
+	return kind==NetKind::ACCEPT;
+}
+
+int Net::GetSocket()
+{
+	return socket;
+}
+
+void Net::Accpet(int socket)
+{
+	this->socket=socket;
+	this->closed=false;
+	this->kind=NetKind::ACCEPT;
+}
+
+int Net::Recv()
+{
+	return 0;
+}
+
+int Net::Send()
+{
+	return 0;
+}
+
+bool Net::IsClosed()
 {
 	return this->closed;
 }
