@@ -11,13 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BufferBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Net.cpp" />
+    <ClCompile Include="NetBuffer.cpp" />
     <ClCompile Include="NetWork.cpp" />
     <ClCompile Include="Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BufferBase.h" />
     <ClInclude Include="Net.h" />
+    <ClInclude Include="NetBuffer.h" />
     <ClInclude Include="NetWork.h" />
     <ClInclude Include="Singleton.h" />
   </ItemGroup>

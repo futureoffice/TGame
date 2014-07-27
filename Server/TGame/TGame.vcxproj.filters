@@ -27,6 +27,12 @@
     <ClCompile Include="Singleton.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="NetBuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Net.h">
@@ -36,6 +42,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NetBuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferBase.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
