@@ -14,21 +14,19 @@ typedef int SOCKET;
 class NetWork: public Singleton<NetWork>
 {
 	friend class Singleton<NetWork>;
-	typedef void OnAccept(Net);
-	typedef void OnClose(Net);
 	
 protected:
 	NetWork(void);
 public:
 	void Start();
-	Net Listen(const char* host, OnAccept onAccept, OnClose onClose);
-	void Accpet(Net net);
+	Net* Listen(const char* host, Net::OnAccept onAccept, Net::OnClose onClose);
+	void Accept(Net* net);
 	void Loop();
-	std::list<Net>  GetNets();
-	void ReleaseNet(Net);
+	std::list<Net*>  GetNets();
+	void ReleaseNet(Net*);
 	~NetWork(void);
 private:
-	std::list<Net> nets;
+	std::list<Net*> nets;
 #ifdef _WIN32
 	Select select;
 #endif

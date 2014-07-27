@@ -22,6 +22,9 @@
     <ClCompile Include="BufferBase.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assert.h">
@@ -43,6 +46,9 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

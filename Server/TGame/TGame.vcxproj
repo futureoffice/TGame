@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="BufferBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Net.cpp" />
@@ -20,6 +21,7 @@
     <ClCompile Include="Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Buffer.h" />
     <ClInclude Include="BufferBase.h" />
     <ClInclude Include="Assert.h" />
     <ClInclude Include="Net.h" />

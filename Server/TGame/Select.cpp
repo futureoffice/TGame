@@ -45,20 +45,21 @@ int Select::Dispatch(int timeout)
     {
 		return n;
 	}
-	std::list<Net> nets = NetWork::getInstance()->GetNets();
-	std::list<Net>::iterator it;
+	std::list<Net*> nets = NetWork::getInstance()->GetNets();
+	std::list<Net*>::iterator it;
 	for(it=nets.begin();it!=nets.end();++it)
 	{
-		SOCKET sock = (*it).GetSocket();
+		SOCKET sock = (*it)->GetSocket();
         if (FD_ISSET(sock, &rset_out))
         {
-			if((*it).IsServer())
+			if((*it)->IsServer())
 			{
-				NetWork::getInstance()->Accpet(*it);
+				NetWork::getInstance()->Accept(*it);
+
 			}
 			else
 			{
-				(*it).Recv();
+				(*it)->Recv();
 			}
 		}
 	}
