@@ -1,3 +1,9 @@
 *.sdf
 *.pdb
+*.opensdf
+*.suo
+Server/*.suo
+Server/Debug/*
+Server/TGame/Debug/*
+Server/Output/*
 

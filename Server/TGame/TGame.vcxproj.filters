@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="NetBuffer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="NetWork.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Select.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Net.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferBase.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Assert.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferBase.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Net.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="NetBuffer.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="NetWork.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Select.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Include">
+      <UniqueIdentifier>{8286ddfe-8a89-4e79-bb2e-caba2c8ca7e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{9ec81b8a-b970-4bf0-a156-4e76bc88b1bc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

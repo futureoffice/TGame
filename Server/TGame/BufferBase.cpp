@@ -12,7 +12,7 @@ int BufferBase::GetSize()
 
 int BufferBase::ShiftLeft(int num)
 {
-
+	return 0;
 }
 
 char* BufferBase::GetData()
