@@ -20,11 +20,8 @@
     <ClCompile Include="Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClInclude Include="BufferBase.h" />
-=======
     <ClInclude Include="Assert.h" />
->>>>>>> 5e16a6995c804ee96b36ac3327a593524c78d0f2
     <ClInclude Include="Net.h" />
     <ClInclude Include="NetBuffer.h" />
     <ClInclude Include="NetWork.h" />
