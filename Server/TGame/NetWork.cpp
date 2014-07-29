@@ -77,8 +77,11 @@ void NetWork::Loop()
 		Net* net=*it;
 		if(net->IsClosed())
 		{
-			select.Del(net->GetSocket());
+			#ifdef _WIN32
+				select.Del(net->GetSocket());
+			#endif
 			nets.erase(it++);
+			delete net;
 		}
 	}
 }

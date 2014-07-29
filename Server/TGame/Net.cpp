@@ -100,5 +100,6 @@ void Net::SetOnReceive(OnReceive onReceive, OnClose onClose)
 
 Net::~Net()
 {
-	delete mBuffer;
+	if(mBuffer)
+		delete mBuffer;
 }
