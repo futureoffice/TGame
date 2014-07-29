@@ -15,15 +15,18 @@ public:
 	typedef int OnReceive(Net* net, const char* data, unsigned int len);
 	typedef int OnClose(Net* net, const char* msg);
 	typedef void OnAccept(Net* net);
+	typedef void OnConnect(Net* net);
 
 	OnReceive* onReceive;
 	OnClose* onClose;
 	OnAccept* onAccept;
+	OnConnect* onConncet;
 
 	Net(void);
 	bool IsClosed();
 	void Server(int, OnAccept, OnClose);
 	void Accept(int);
+	void Client(int, OnConnect, OnClose);
 	bool IsInvalid();
 	bool IsServer();
 	bool IsClient();

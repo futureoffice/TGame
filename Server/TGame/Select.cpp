@@ -8,23 +8,39 @@ Select::Select()
     FD_ZERO(&wset_out);
 }
 Select::~Select(){}
-int Select::Add(SOCKET socket)
+int Select::Add(Net* net)
 {
+	SOCKET socket = net->GetSocket();
     FD_SET(socket, &rset);
+	if(net->IsClient())
+		FD_SET(socket, &wset);
     return 0;
 }
-int Select::Del(SOCKET socket)
+int Select::Del(Net* net)
 {
+	SOCKET socket = net->GetSocket();
     FD_CLR(socket, &rset);
+	if(net->IsClient())
+		 FD_CLR(socket, &wset);
     return 0;
 }
-int Select::Mod(SOCKET socket)
+int Select::Mod(Net* net, int mod)
 {
-	 if (FD_ISSET(socket, &rset))
-		FD_CLR(socket, &rset);
-	 else
-		FD_SET(socket, &rset);
-	 return 0;
+	SOCKET socket = net->GetSocket();
+	if(mod == 0)
+	{
+		if (FD_ISSET(socket, &rset))
+			FD_CLR(socket, &rset);
+		else
+			FD_SET(socket, &rset);
+	}else
+	{
+		if (FD_ISSET(socket, &rset))
+			FD_CLR(socket, &rset);
+		else
+			FD_SET(socket, &rset);
+	}
+	return 0;
 }
 int Select::Dispatch(int timeout)
 {
@@ -55,12 +71,18 @@ int Select::Dispatch(int timeout)
 			if((*it)->IsServer())
 			{
 				NetWork::getInstance()->Accept(*it);
-
+			}
+			else if((*it)->IsClient())
+			{
+				NetWork::getInstance()->SyncConnect(*it);
 			}
 			else
 			{
 				(*it)->Recv();
 			}
+		}else if (FD_ISSET(sock, &wset_out) && (*it)->IsClient())
+		{	
+			NetWork::getInstance()->SyncConnect(*it);
 		}
 	}
 	return n;

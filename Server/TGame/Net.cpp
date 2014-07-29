@@ -53,6 +53,15 @@ void Net::Accept(int socket)
 	mBuffer = new Buffer;
 }
 
+void Net::Client(int socket, OnConnect* onConnect, OnClose* onClose)
+{
+	mSocket=socket;
+	mClosed=false;
+	mKind=NetKind::CLIENT;
+	onConnect = onConnect;
+	onClose = onClose;
+}
+
 int Net::Recv()
 {
 	int left = mBuffer->GetLeft();

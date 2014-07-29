@@ -21,6 +21,8 @@ public:
 	void Start();
 	Net* Listen(const char* host, Net::OnAccept onAccept, Net::OnClose onClose);
 	void Accept(Net* net);
+	Net* Connect(const char* host, Net::OnConnect onConnect, Net::OnClose onClose, unsigned int timeout);
+	void SyncConnect(Net* net);
 	void Loop();
 	std::list<Net*>  GetNets();
 	void ReleaseNet(Net*);
