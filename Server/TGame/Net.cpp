@@ -11,13 +11,13 @@ Net::Net(void)
 	onClose = 0;
 }
 
-void Net::Server(int socket, OnAccept* onAccept, OnClose* onClose)
+void Net::Server(int socket, OnAccept onAccept, OnClose onClose)
 {
 	mSocket=socket;
 	mClosed=false;
 	mKind=NetKind::SERVER;
-	onAccept = onAccept;
-	onClose = onClose;
+	this->onAccept = onAccept;
+	this->onClose = onClose;
 }
 
 bool Net::IsInvalid()
@@ -53,13 +53,13 @@ void Net::Accept(int socket)
 	mBuffer = new Buffer;
 }
 
-void Net::Client(int socket, OnConnect* onConnect, OnClose* onClose)
+void Net::Client(int socket, OnConnect onConnect, OnClose onClose)
 {
 	mSocket=socket;
 	mClosed=false;
 	mKind=NetKind::CLIENT;
-	onConnect = onConnect;
-	onClose = onClose;
+	this->onConncet = onConnect;
+	this->onClose = onClose;
 }
 
 int Net::Recv()

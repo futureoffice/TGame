@@ -1,5 +1,7 @@
 #include "NetWork.h"
 #include "Assert.h"
+#include <iostream>
+
 NetWork* NetWork::Singleton<NetWork>::_instance=0;
 
 NetWork::NetWork(void)
@@ -46,6 +48,7 @@ Net* NetWork::Listen(const char* host, Net::OnAccept onAccept, Net::OnClose onCl
         return 0;
 	Net* net = new Net();
 	net->Server(sock, onAccept, onClose);
+	nets.push_back(net);
 	#ifdef _WIN32
 		select.Add(net);
 	#endif
@@ -54,6 +57,7 @@ Net* NetWork::Listen(const char* host, Net::OnAccept onAccept, Net::OnClose onCl
 
 void NetWork::Accept(Net* net)
 {
+	std::cout<<"Accept on connection"<<std::endl;
 	TAssert(net->IsServer(), "Only Listen Socket Can Accept!");
 	SOCKET newsock = ::accept(net->GetSocket(), NULL, NULL);
 	if( newsock < 0 )

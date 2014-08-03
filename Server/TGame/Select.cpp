@@ -1,9 +1,10 @@
 ﻿#include "Select.h"
 #include "NetWork.h"
+#include <iostream>
 Select::Select()
 {
     FD_ZERO(&rset);
-    FD_ZERO(&wset);
+    FD_ZERO(&wset);	
     FD_ZERO(&rset_out);
     FD_ZERO(&wset_out);
 }
@@ -50,6 +51,7 @@ int Select::Dispatch(int timeout)
     memcpy(&rset_out, &rset, sizeof(rset));
     memcpy(&wset_out, &wset, sizeof(wset));
 	int n = select(0, &rset_out,&wset_out,NULL,&tv);
+	//std::cout<<"Select Mode:"<<n<<std::endl;
     if(n < 0)
     {
 		if(WSAEINVAL == SOCKET_ERROR)
@@ -66,8 +68,10 @@ int Select::Dispatch(int timeout)
 	for(it=nets.begin();it!=nets.end();++it)
 	{
 		SOCKET sock = (*it)->GetSocket();
+		std::cout<<"FD_ISSET(sock, &rset_out):"<<FD_ISSET(sock, &rset_out)<<std::endl;
         if (FD_ISSET(sock, &rset_out))
         {
+			std::cout<<"Select IsServer:"<<(*it)->IsServer()<<std::endl;
 			if((*it)->IsServer())
 			{
 				NetWork::getInstance()->Accept(*it);

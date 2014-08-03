@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #ifdef _DEBUG
 	#define TAssert(cond, msg) if(!(cond)) { printf(msg); exit(1); } 
 #else
