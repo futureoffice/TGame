@@ -91,6 +91,75 @@ void DataBase::Execute(const char* sql, std::vector<int, VarType*>* args)
 	int paramn = args->size();
 	if (pn != paramn )
 		printf("bad argument (%d parameters expected, got %d)", pn, paramn);
+	long long pis[128], cis[128];
+	memset(st->params, 0, pn * sizeof(MYSQL_BIND));
+	for (int p = 1; p <= pn; p++)
+	{
+		MYSQL_BIND *b = st->params+p-1;
+		b->buffer = pis+p;
+		mysqlEnc();
+	}
+	if (mysql_stmt_bind_param(st, st->params))
+	{
+		printf("sql error: bind param ", pn);
+		return;
+	}
+	if (cn > 0)
+	{
+		memset(st->bind, 0, cn * sizeof(MYSQL_BIND));
+		if (mysql_stmt_bind_result(st, st->bind))
+			mysqlErr(lua, upx(1), sql, "sql error: %s", st, 0);
+	}
+	if (mysql_stmt_execute(st))
+		mysqlErr(lua, upx(1), sql, "sql error: %s", st, 0);
+	if (cn == 0)
+		return pushn(lua, mysql_stmt_affected_rows(st)), pushn(lua, mysql_stmt_insert_id(st)), 2;
+
+	int D = gettop(lua)+1, c;
+	if (cols)
+		for (newtablen(lua, 0, cn), c = 1; c <= cn; c++) // D data
+			isnil(lua, L+1) || (rawgeti(lua, L+3, c), rawget(lua, L+1), popz(lua)) // !exclude[prepare[c]]
+			? newtablen(lua, 8, 0), rawgeti(lua, L+3, c), rawsetv(lua, D, -2) : pushz(lua); // D+c cols
+	else
+		newtablen(lua, 8, 0); // D data
+	for (int r = 1; ; r++)
+	{
+		memset(st->bind, 0, cn * sizeof(MYSQL_BIND));
+		for (c = 1; c <= cn; c++)
+		{
+			MYSQL_BIND *b = st->bind+c-1;
+#if WIN
+			b->buffer_type = (enum_field_types)cts[c];
+#else
+			b->buffer_type = (enum_field_types)cts[c];
+#endif
+			b->buffer = cis+c, cis[c] = 0;
+			b->buffer_length = cts[c]==MYSQL_TYPE_STRING || cts[c]==MYSQL_TYPE_BLOB ? 0 : 8;
+		}
+		mysql_stmt_bind_result(st, st->bind);
+		int fail = mysql_stmt_fetch(st);
+		if (fail == MYSQL_NO_DATA)
+			break;
+		if (fail && fail != MYSQL_DATA_TRUNCATED)
+			mysqlErr(lua, upx(1), sql, "sql error: %s", st, 2);
+		if ( !cols)
+			newtablen(lua, 0, cn); // row
+		for (c = 1; c <= cn; c++)
+		{
+			MYSQL_BIND *b = st->bind+c-1;
+			if ((int)b->buffer_type != cts[c])
+				err = mysql_stmt_error(st), mysql_stmt_free_result(st),
+				error(lua, "sql error: different column type %d %d", cts[c], b->buffer_type);
+			if (isnil(lua, L+1) || (rawgeti(lua, L+3, c), rawget(lua, L+1), popz(lua))) // !exclude[prepare[c]]
+			{
+				cols || (rawgeti(lua, L+3, c), 0); // column name
+				mysqlDec(lua, upx(1), sql, st, b, c);
+				cols ? rawseti(lua, D+c, r) : rawset(lua, -3);
+			}
+		}
+		if ( !cols)
+			rawseti(lua, D, r);
+	}
 }
 
 void DataBase::Close(const char* reason)
